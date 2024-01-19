@@ -9,7 +9,7 @@ const lowercaseCheck = document.querySelector("#lowercase");
 const numbersCheck = document.querySelector("#numbers");
 const symbolsCheck = document.querySelector("#symbols");
 const indicator = document.querySelector("[data-indicator]");
-const generateBtn = document.querySelector(".generateButton");
+const generateBtn = document.querySelector(".Generate");
 const allCheckBox = document.querySelectorAll("input[type=checkbox]");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
@@ -79,8 +79,51 @@ function calcStrength()
 
 async function copyContent()
 {
-    await navigator.clipboard.writeText(passwordDisplay.value);
+    try
+    {
+        await navigator.clipboard.writeText(passwordDisplay.value);
+        copyMsg.innerText = "Copied";
+    }
+    catch(e)
+    {
+        copyMsg.innerText = "Failed";
+    }
+    
+    copyMsg.classList.add("active");
+    setTimeout(() => {
+       copyMsg.classList.remove("active"); 
+    }, 2000);
 }
 
+inputSlider.addEventListener('input', (e)=> {
+    passwordLength = e.target.value;
+    handleSlider();
+})
 
+copyBtn.addEventListener('click', ()=>{
+    if(passwordDisplay.value)
+        copyContent();
+})
 
+generateBtn.addEventListener('click', ()=>{
+
+})
+
+function handleCheckBoxChange()
+{
+    checkCount = 0;
+    allCheckBox.forEach((checkbox) => {
+        if(checkbox.checked)
+            checkCount++;
+    })
+
+    if(checkCount > passwordLength)
+    {
+        passwordLength = checkCount;
+        handleSlider();
+    }
+}
+
+allCheckBox.forEach((checkbox) => {
+    checkbox.addEventListener('change', handleCheckBoxChange);
+});
