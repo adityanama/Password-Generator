@@ -16,6 +16,7 @@ const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 let password = "";
 let passwordLength = 10;
 let checkCount = 1;
+let checkCount = 0;
 handleSlider();
 
 // set passwords length
@@ -43,12 +44,12 @@ function generateRandomNumber()
 
 function generateLowerCase ()
 {
-    return String.fromCharCode(getRandomInteger(97,123) + 'A');
+    return String.fromCharCode(getRandomInteger(97,123));
 }
 
 function generateUpperCase ()
 {
-    return String.fromCharCode(getRandomInteger(65,91) + 'A');
+    return String.fromCharCode(getRandomInteger(65,91));
 }
 
 function generateSymbol()
@@ -105,8 +106,62 @@ copyBtn.addEventListener('click', ()=>{
         copyContent();
 })
 
-generateBtn.addEventListener('click', ()=>{
+function shuffle(arr)
+{
+    // fisher yates method
+    for(let i=arr.length-1; i>0; i--)
+    {
+        const j = Math.floor(Math.random() * (i+1));
 
+        const temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp; 
+    }
+
+    let ans = "";
+    arr.forEach((s) => (ans += s));
+    return ans;
+}
+
+generateBtn.addEventListener('click', ()=>
+{
+    if(checkCount == 0)
+    {
+        passwordDisplay.value = "";
+        return;
+    }
+
+    if(passwordLength < checkCount)
+    {
+        passwordLength = checkCount;
+        handleSlider();
+    }
+
+    password = "";
+
+    let funcArr = [];
+    if(uppercaseCheck.checked)
+        funcArr.push(generateUpperCase);
+    if(lowercaseCheck.checked)
+        funcArr.push(generateLowerCase);
+    if(symbolsCheck.checked)
+        funcArr.push(generateSymbol);
+    if(numbersCheck.checked)
+        funcArr.push(generateRandomNumber);
+
+    for(let i=0; i<funcArr.length; i++)
+        password += funcArr[i]();
+
+    for(let i=0; i<passwordLength-funcArr.length; i++)
+    {
+        let randInt = getRandomInteger(0,funcArr.length);
+        password += funcArr[randInt]();
+    }
+
+    password = shuffle(Array.from(password));
+    
+    passwordDisplay.value = password;
+    calcStrength();
 })
 
 function handleCheckBoxChange()
