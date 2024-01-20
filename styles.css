@@ -145,6 +145,7 @@ h1 {
     color: var(--vb-yellow);
     font-weight: 600;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .check {
