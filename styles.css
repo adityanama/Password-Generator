@@ -55,7 +55,7 @@ h1 {
     border-bottom: 0.35 solid var(--lt-violet2);
     margin: 1rem 0;
     padding-top: 0.35rem;
-    min-width: 350px;
+    min-width: 450px;
 }
 
 .display {
@@ -91,7 +91,7 @@ h1 {
 }
 
 .input-container {
-    width: 26%;
+    width: 30%;
     background-color: var(--dk-violet);
     border-radius: 1rem;
     padding: 2rem;
@@ -138,7 +138,7 @@ h1 {
     padding: 1rem 0;
     background-color: var(--vb-violet);
     text-align: center;
-    border-radius: 0.75rem; 
+    border-radius: 0.75rem;
     border-bottom: 0.35rem solid var(--vb-yellow);
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -154,7 +154,7 @@ h1 {
     gap: 0 1rem;
 }
 
-.check input{
+.check input {
     appearance: none;
     width: 20px;
     height: 20px;
@@ -164,7 +164,108 @@ h1 {
     border-radius: 0.35rem;
 }
 
-.check input:checked{
+.check input:checked {
     background-color: var(--vb-cyan);
 }
+
+.check input:checked::before {
+    content: '✔';
+    position: absolute;
+    color: var(--dk-text);
+    font-size: 1.05rem;
+    font-weight: 900;
+    left: 15%;
+    top: -2.5px;
+}
+
+.check label {
+    color: var(--pl-white);
+    font-size: 1.25rem;
+    letter-spacing: 0.75px;
+    cursor: pointer;
+}
+
+.slider {
+    appearance: none;
+    width: 100%;
+    height: 0.75rem;
+    cursor: pointer;
+    background-color: var(--lt-violet);
+    border-radius: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    background-image: linear-gradient(var(--vb-violet), var(--vb-violet));
+    background-repeat: no-repeat;
+    border: none;
+    outline: none;
+    z-index: -1;
+}
+
+.slider::-webkit-slider-thumb {
+    position: relative;
+    z-index: 1;
+    appearance: none;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: var(--vb-yellow);
+    cursor: pointer;
+    margin-top: -3px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 229, 61, 0.50);
+    transition: all 100ms ease-in;
+}
+
+.slider:focus {
+    outline: 3px solid var(--vb-yellow);
+}
+
+.slider::-webkit-slider-thumb:hover {
+    outline: 2px solid var(--vb-yellow);
+    background-color: var(--dk-violet);
+    box-shadow: 0px 0px 25px 5px rgba(255, 229, 61, 0.80);
+}
+
+.copyBtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+span {
+    position: absolute;
+    background-color: var(--vb-violet2);
+    color: var(--vb-yellow);
+    font-size: 1rem;
+    top: -35px;
+    left: -25px;
+    padding: 5px 10px;
+    border-radius: 1rem;
+    opacity: 0;
+    transform-origin: bottom;
+    transition: all 250ms ease-in-out;
+}
+
+span.active {
+    opacity: 1;
+}
+
+.slider::-moz-range-thumb {
+    position: relative;
+    z-index: 1;
+    appearance: none;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background: var(--vb-yellow);
+    box-shadow: 0px 0px 20px 0px rgba(255, 229, 61, 0.50);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb:hover {
+    z-index: 5;
+    outline: 2px solid var(--vb-yellow);
+    background-color: var(--dk-violet);
+    box-shadow: 0px 0px 25px 5px rgba(255, 229, 61, 0.80);
+}
+
 

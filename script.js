@@ -24,12 +24,14 @@ function handleSlider()
 {
     inputSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
+
+    inputSlider.style.backgroundSize = (passwordLength*100/20) + "% 100%";
 }
 
 function setIndicator(color)
 {
     indicator.style.backgroundColor = color;
-    //shadow
+    indicator.style.boxShadow = `0px 0px 12px 1px ${color}`;
 }
 
 function getRandomInteger(min,maxx)
